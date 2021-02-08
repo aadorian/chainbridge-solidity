@@ -22,7 +22,8 @@
  * phrase from a file you've .gitignored so it doesn't accidentally become public.
  *
  */
-
+require('dotenv').config()
+ const HDWalletProvider = require('@truffle/hdwallet-provider');
 // const HDWalletProvider = require('truffle-hdwallet-provider');
 // const infuraKey = "fj4jll3k.....";
 //
@@ -53,7 +54,20 @@ module.exports = {
      port: 8545,            // Standard Ethereum port (default: none)
      network_id: "5",       // Any network (default: none)
     },
-
+    binance: {
+      provider: () => new HDWalletProvider(`${process.env.MNEMONIC}`, `${process.env.URL_BINANCE_TESTNET}`),
+      network_id: 97,
+      confirmations: 10,
+      timeoutBlocks: 200,
+      skipDryRun: true
+    },
+    binanceMainNet: {
+      provider: () => new HDWalletProvider(`${process.env.MNEMONIC}`, `${process.env.URL_BINANCE_MAINNET}`),
+      network_id: 56,
+      confirmations: 10,
+      timeoutBlocks: 200,
+      skipDryRun: true
+    },
     test: {
       host: "127.0.0.1",     // Localhost (default: none)
       port: 8545,            // Standard Ethereum port (default: none)
